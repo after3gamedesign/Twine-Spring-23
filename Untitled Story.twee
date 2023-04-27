@@ -1,0 +1,44 @@
+:: StoryTitle
+Untitled Story
+
+
+:: StoryData
+{
+  "ifid": "5BDF9A5E-821D-43B1-BF28-D2FE0760D651",
+  "format": "Harlowe",
+  "format-version": "3.3.5",
+  "start": "start",
+  "zoom": 1
+}
+
+
+:: Brag {"position":"1025,500","size":"100,100"}
+(set: $s to (either: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50,))
+You see a dude with $s buffness. Try and beat him.
+
+[[Fight]]
+
+
+:: Fight {"position":"1025,625","size":"100,100"}
+You are fighting the dude on the street.
+
+(if: ($s > $g))[You lost :(  [[Walk again|start]]] (if: ($s < $g))[You won :) [[Walk again|start]]]
+
+
+:: Gained {"position":"1025,375","size":"100,100"}
+(set: $g to $g + $ged)
+(if: ($g is 100 or > 100))[You exploded beause you were too buff.]
+(else:)[You earned $ged buffness [[Start To Walk Again|start]]]
+(set: $ged to (either:1,2,3,4,5,6,7,8,9,10,))
+
+
+:: Get-Buffer {"position":"900,500","size":"100,100"}
+(set: $counter to 10)(live: 1s)[(set: $counter to it - 1)(if: $counter is 0)[(go-to: "Gained")](replace: ?amount)[$counter]]
+You are getting buffer(text-style: "blink")[...] Wait (set: $counter to 10)|amount>[$counter] seconds to get buff.
+
+
+:: start {"position":"900,375","size":"100,100"}
+You are walking down the street, when you see buff dudes bragging about how buff their legs are.
+
+You have $g buffness
+[[Exercise Your Legs|Get-Buffer]] Or [[Go To A Contest On How Buff Your Leggs Are|Brag]]
